@@ -1,0 +1,417 @@
+        data structure completed programs
+
+program 1:
+
+#include <stdio.h>
+
+#define R1 2  // Number of rows in Matrix-1
+#define C1 2  // Number of columns in Matrix-1
+#define R2 2  // Number of rows in Matrix-2
+#define C2 3  // Number of columns in Matrix-2
+
+void multiplyMatrix(int m1[][C1], int m2[][C2]) {
+    int result[R1][C2];
+
+    printf("Resultant Matrix:\n");
+    for (int i = 0; i < R1; ++i) {
+        for (int j = 0; j < C2; ++j) {
+            result[i][j] = 0;
+            for (int k = 0; k < R2; ++k) {
+                result[i][j] += m1[i][k] * m2[k][j];
+            }
+            printf("%d\t", result[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int m1[R1][C1] = {{1, 1}, {2, 2}};
+    int m2[R2][C2] = {{1, 1, 1}, {2, 2, 2}};
+
+    if (C1 != R2) {
+        printf("The number of columns in Matrix-1 must be equal to the number of rows in Matrix-2\n");
+        printf("Please update MACROs value according to your array dimension in #define section\n");
+        return 1;
+    }
+
+    multiplyMatrix(m1, m2);
+    return 0;
+}
+
+
+program 2:
+
+#include <stdio.h>
+
+int main() {
+    int num;
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+
+    // Check if num is perfectly divisible by 2
+    if (num % 2 == 0)
+        printf("%d is even.", num);
+    else
+        printf("%d is odd.", num);
+
+    return 0;
+}
+
+
+program 3:
+
+
+#include <stdio.h>
+
+int main() {
+    int num;
+    long long factorial = 1;
+
+    printf("Enter a positive integer: ");
+    scanf("%d", &num);
+
+    // Calculate factorial using a for loop
+    for (int i = 1; i <= num; ++i) {
+        factorial *= i;
+    }
+
+    printf("Factorial of %d = %lld\n", num, factorial);
+    return 0;
+}
+
+
+program 4:
+
+#include <stdio.h>
+
+int main() {
+    int n, firstTerm = 0, secondTerm = 1, nextTerm;
+
+    printf("Enter the number of terms required in the Fibonacci Series: ");
+    scanf("%d", &n);
+
+    printf("\nThe Fibonacci Series is:\n");
+    printf("%d %d ", firstTerm, secondTerm);
+
+    for (int i = 2; i < n; ++i) {
+        nextTerm = firstTerm + secondTerm;
+        printf("%d ", nextTerm);
+        firstTerm = secondTerm;
+        secondTerm = nextTerm;
+    }
+
+    return 0;
+}
+
+program 5:
+
+#include <stdio.h>
+
+// Function to compute factorial using recursion
+long int multiplyNumbers(int n) {
+    if (n >= 1)
+        return n * multiplyNumbers(n - 1);
+    else
+        return 1;
+}
+
+int main() {
+    int n;
+    printf("Enter a positive integer: ");
+    scanf("%d", &n);
+
+    printf("Factorial of %d = %ld\n", n, multiplyNumbers(n));
+    return 0;
+}
+
+program 6:
+#include <stdio.h>
+
+int fibonacci(int num) {
+    // Base condition
+    if (num == 0 || num == 1) {
+        return num;
+    } else {
+        // Recursive call
+        return fibonacci(num - 1) + fibonacci(num - 2);
+    }
+}
+
+int main(void) {
+    int terms;
+    printf("Enter the number of terms: ");
+    scanf("%d", &terms);
+
+    for (int n = 0; n < terms; n++) {
+        printf("%d ", fibonacci(n));
+    }
+
+    return 0;
+}
+
+program 7:
+
+#include <stdio.h>
+
+void insertElement(int arr[], int *size, int position, int value) {
+    if (*size >= 100) {
+        printf("Array is full. Cannot insert.\n");
+        return;
+    }
+    for (int i = *size; i > position; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[position] = value;
+    (*size)++;
+}
+
+int main() {
+    int arr[100] = {10, 20, 30, 40};
+    int size = 4;
+    int position = 2;
+    int value = 25;
+
+    insertElement(arr, &size, position, value);
+
+    printf("Array after insertion:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+
+// deletion of  elements
+#include <stdio.h>
+
+void deleteElement(int arr[], int *size, int position) {
+    if (*size == 0) {
+        printf("Array is empty. Cannot delete.\n");
+        return;
+    }
+    for (int i = position; i < *size - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    (*size)--;
+}
+
+int main() {
+    int arr[100] = {10, 20, 25, 30, 40};
+    int size = 5;
+    int position = 2;
+
+    deleteElement(arr, &size, position);
+
+    printf("Array after deletion:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+
+
+// displaying elements
+#include <stdio.h>
+
+void displayArray(int arr[], int size) {
+    printf("Array elements:\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[100] = {10, 20, 25, 30, 40};
+    int size = 5;
+
+    displayArray(arr, size);
+
+    return 0;
+}
+
+program 8:
+#include <stdio.h>
+
+int linearSearch(int arr[], int size, int key) {
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == key) {
+            return i; // Element found, return its index
+        }
+    }
+    return -1; // Element not found
+}
+
+int main() {
+    int arr[10] = {3, 4, 1, 7, 5, 8, 11, 42, 3, 13};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int key = 4;
+    int index = linearSearch(arr, size, key);
+
+    if (index == -1) {
+        printf("The element is not present in the array.\n");
+    } else {
+        printf("The element is present at arr[%d].\n", index);
+    }
+
+    return 0;
+}
+
+program 9:
+
+#include <stdio.h>
+
+int binarySearch(int arr[], int l, int r, int x) {
+    if (r >= l) {
+        int mid = l + (r - l) / 2;
+        if (arr[mid] == x)
+            return mid;
+        if (arr[mid] > x)
+            return binarySearch(arr, l, mid - 1, x);
+        return binarySearch(arr, mid + 1, r, x);
+    }
+    return -1;
+}
+
+int main(void) {
+    int arr[] = {2, 3, 4, 10, 40};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int x = 10;
+    int index = binarySearch(arr, 0, size - 1, x);
+    if (index == -1) {
+        printf("Element is not present in the array\n");
+    } else {
+        printf("Element is present at index %d\n", index);
+    }
+    return 0;
+}
+
+program 10:
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node*next;
+};
+
+void insertAtBeginning(struct Node**head, int value) {
+    struct Node*newNode = malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+void deleteFromEnd(struct Node** head) {
+    if (*head == NULL || (*head)->next == NULL)
+        return;
+
+    struct Node* temp = *head;
+    while (temp->next->next != NULL)
+        temp = temp->next;
+
+    free(temp->next);
+    temp->next = NULL;
+}
+
+void displayList(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+
+    insertAtBeginning(&head, 10);
+    insertAtBeginning(&head, 20);
+    insertAtBeginning(&head, 30);
+
+    printf("Linked list after insertion:\n");
+    displayList(head);
+
+    deleteFromEnd(&head);
+
+    printf("Linked list after deletion:\n");
+    displayList(head);
+
+    return 0;
+}
+
+program 11:
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+struct Stack {
+    int arr[MAX_SIZE];
+    int top;
+};
+
+void initialize(struct Stack* stack) {
+    stack->top = -1;
+}
+
+int isEmpty(struct Stack* stack) {
+    return stack->top == -1;
+}
+
+int isFull(struct Stack* stack) {
+    return stack->top == MAX_SIZE - 1;
+}
+
+void push(struct Stack* stack, int value) {
+    if (isFull(stack)) {
+        printf("Stack overflow! Cannot push.\n");
+        return;
+    }
+    stack->arr[++stack->top] = value;
+}
+
+int pop(struct Stack* stack) {
+    if (isEmpty(stack)) {
+        printf("Stack underflow! Cannot pop.\n");
+        return -1;
+    }
+    return stack->arr[stack->top--];
+}
+
+int peek(struct Stack* stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty! Cannot peek.\n");
+        return -1;
+    }
+    return stack->arr[stack->top];
+}
+
+int main() {
+    struct Stack myStack;
+    initialize(&myStack);
+
+    push(&myStack, 10);
+    push(&myStack, 20);
+    push(&myStack, 30);
+
+    printf("Top element: %d\n", peek(&myStack));
+
+    printf("Popped element: %d\n", pop(&myStack));
+    printf("Popped element: %d\n", pop(&myStack));
+
+    printf("Is stack empty? %s\n", isEmpty(&myStack) ? "Yes" : "No");
+
+    return 0;
+}
+ 
+
+
